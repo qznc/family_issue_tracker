@@ -2,7 +2,7 @@ from django.db import models
 
 class Issue(models.Model):
     title = models.CharField(max_length=60)
-    description = models.TextField(
+    description = models.TextField(null=True, blank=True,
         help_text="Editable text field")
     created = models.DateTimeField(auto_now_add=True)
     closed = models.DateTimeField(null=True, blank=True)
