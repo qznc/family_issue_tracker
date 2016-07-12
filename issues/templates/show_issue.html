@@ -1,0 +1,15 @@
+{% block content %}
+<h2>{{ issue.title }}</h2>
+<p>{{ issue.description }}</p>
+<table>
+<tr><td>Created</td><td>{{ issue.created }}</td></tr>
+{% if issue.closed %}
+<tr><td>Closed</td><td>{{ issue.closed }}</td></tr>
+{% endif %}
+</table>
+<ol class="comments">
+{% for comment in issue.comments.all %}
+<li><p>{{ comment.body }}</p></li>
+{% endfor %}
+</ol>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% block content %}
+<table>
+{% for issue in issues %}
+<tr>
+<td><a href="{% url 'show_issue' issue.pk %}">{{ issue.title }}</a></td>
+<td>{{ issue.created }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<form>
+<p>Create new one</p>
+</form>
+{% endblock %}
+
