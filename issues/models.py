@@ -6,6 +6,7 @@ class Issue(models.Model):
     title = models.CharField(max_length=60)
     description = models.TextField(null=True, blank=True,
         help_text="Editable text field")
+    creator = models.CharField(max_length=256, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     closed = models.DateTimeField(null=True, blank=True)
     for_anon = models.BooleanField(default=False,
@@ -28,4 +29,5 @@ class Comment(models.Model):
     issue = models.ForeignKey('Issue', on_delete=models.CASCADE,
         related_name="comments")
     body = models.TextField()
+    creator = models.CharField(max_length=256, blank=True)
     created = models.DateTimeField(auto_now_add=True)

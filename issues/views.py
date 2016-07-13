@@ -37,7 +37,9 @@ def create(request):
     if request.method == "POST":
         form = IssueForm(request.POST)
         if form.is_valid():
-            i = form.save()
+            i = form.save(commit=False)
+            i.creator = getattr(request.user, 'first_name', 'anonym')
+            i.save()
             return redirect('show_issue', i.pk)
     else:
         form = IssueForm()
@@ -54,7 +56,9 @@ def show(request, id):
 def create_comment(request):
     form = CommentForm(request.POST)
     assert form.is_valid()
-    i = form.save()
+    i = form.save(commit=False)
+    i.creator = getattr(request.user, 'first_name', 'anonym')
+    i.save()
     return redirect('show_issue', i.issue.pk)
 
 @require_POST

@@ -10,6 +10,7 @@
 {% if issue.closed %}
 <tr><td>Closed</td><td>{{ issue.closed|date:"Y-m-d H:i e" }}</td></tr>
 {% endif %}
+<tr><td>Creator</td><td>{{ issue.creator }}</td></tr>
 </table>
 <div class="issue_modifiers">
 	<a id="edit_issue" href="{% url 'edit_issue' issue.id %}">Edit</a>
@@ -29,7 +30,7 @@
 </div>
 <ol class="comments">
 {% for comment in issue.comments.all %}
-<li><p>{{ comment.body|markdown }}</p></li>
+<li><p>{{ comment.body|markdown }}</p><p>by {{comment.creator}}</li>
 {% endfor %}
 <li><form method="POST" action="{% url 'create_comment' %}">
 {% csrf_token %}
