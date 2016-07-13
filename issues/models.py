@@ -20,6 +20,10 @@ class Issue(models.Model):
         self.closed = datetime.now()
         self.save()
 
+    def reopen(self):
+        self.closed = None
+        self.save()
+
 class Comment(models.Model):
     issue = models.ForeignKey('Issue', on_delete=models.CASCADE,
         related_name="comments")

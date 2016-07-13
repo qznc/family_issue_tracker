@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^create$', create, name='create_issue'),
     url(r'^create_comment$', create_comment, name='create_comment'),
     url(r'^close_issue$', close_issue, name='close_issue'),
+    url(r'^reopen_issue$', reopen_issue, name='reopen_issue'),
 ]

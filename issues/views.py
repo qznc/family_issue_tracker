@@ -62,3 +62,9 @@ def close_issue(request):
     issue = get_object_or_404(Issue, pk=request.POST['issue_id'])
     issue.close()
     return redirect('index')
+
+@require_POST
+def reopen_issue(request):
+    issue = get_object_or_404(Issue, pk=request.POST['issue_id'])
+    issue.reopen()
+    return redirect('show_issue', issue.pk)
