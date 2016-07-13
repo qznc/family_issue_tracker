@@ -4,28 +4,29 @@
 
 {% block content %}
 <h2>{{ issue.title }}</h2>
-<p><a href="{% url 'edit_issue' issue.id %}">edit</a></p>
 <p>{{ issue.description|markdown }}</p>
-<table>
+<table class="issuemeta">
 <tr><td>Created</td><td>{{ issue.created|date:"Y-m-d H:i e" }}</td></tr>
 {% if issue.closed %}
 <tr><td>Closed</td><td>{{ issue.closed|date:"Y-m-d H:i e" }}</td></tr>
 {% endif %}
-<tr><td></td><td>
-{% if issue.closed == None %}
-<form method="POST" action="{% url 'close_issue' %}">
-{% else %}
-<form method="POST" action="{% url 'reopen_issue' %}">
-{% endif %}
-{% csrf_token %}
-<input type="hidden" name="issue_id" value="{{issue.id}}" />
-{% if issue.closed == None %}
-<button>Close</button>
-{% else %}
-<button>Reopen</button>
-{% endif %}
-</form></td></tr>
 </table>
+<div class="issue_modifiers">
+	<a id="edit_issue" href="{% url 'edit_issue' issue.id %}">Edit</a>
+	{% if issue.closed == None %}
+	<form method="POST" action="{% url 'close_issue' %}">
+	{% else %}
+	<form method="POST" action="{% url 'reopen_issue' %}">
+	{% endif %}
+	{% csrf_token %}
+	<input type="hidden" name="issue_id" value="{{issue.id}}" />
+	{% if issue.closed == None %}
+	<button>Close</button>
+	{% else %}
+	<button>Reopen</button>
+	{% endif %}
+	</form>
+</div>
 <ol class="comments">
 {% for comment in issue.comments.all %}
 <li><p>{{ comment.body|markdown }}</p></li>
@@ -35,6 +36,7 @@
 {{ commentform.body }}
 <input type="hidden" name="{{commentform.issue.name}}" value="{{issue.id}}" />
 <button>Comment</button>
+<hr class="clear"/>
 </form></li>
 </ol>
 {% endblock %}

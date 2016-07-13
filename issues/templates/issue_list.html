@@ -2,19 +2,18 @@
 
 {% block content %}
 <table>
-<thead><th>Title</th><th>Created</th></thead>
+<thead><th class="title">Title</th><th class="date">Created</th></thead>
 {% for issue in issues %}
 <tr>
-<td><a href="{% url 'show_issue' issue.pk %}">{{ issue.title }}</a></td>
-<td>{{ issue.created|date:"Y-m-d H:i e" }}</td>
+<td class="title"><a href="{% url 'show_issue' issue.pk %}">{{ issue.title }}</a></td>
+<td class="date creation">{{ issue.created|date:"Y-m-d H:i e" }}</td>
 </tr>
 {% empty %}
-<p>No issues</p>
+<p>No issues. <a href="{% url 'create' %}">Create one</a>.</p>
 {% endfor %}
 </table>
 
 <form>
-<p>Create new one</p>
 </form>
 {% endblock %}
 
