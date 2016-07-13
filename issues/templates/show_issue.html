@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
+{% load markdown_deux_tags %}
+
 {% block content %}
 <h2>{{ issue.title }}</h2>
 <p><a href="{% url 'edit_issue' issue.id %}">edit</a></p>
-<p>{{ issue.description }}</p>
+<p>{{ issue.description|markdown }}</p>
 <table>
 <tr><td>Created</td><td>{{ issue.created|date:"Y-m-d H:i e" }}</td></tr>
 {% if issue.closed %}
@@ -26,7 +28,7 @@
 </table>
 <ol class="comments">
 {% for comment in issue.comments.all %}
-<li><p>{{ comment.body }}</p></li>
+<li><p>{{ comment.body|markdown }}</p></li>
 {% endfor %}
 <li><form method="POST" action="{% url 'create_comment' %}">
 {% csrf_token %}
