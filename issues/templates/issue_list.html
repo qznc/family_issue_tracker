@@ -9,7 +9,7 @@
 <td class="date creation">{{ issue.created|date:"Y-m-d H:i e" }}</td>
 </tr>
 {% empty %}
-<p>No issues. <a href="{% url 'create' %}">Create one</a>.</p>
+<p>No issues. <a href="{% url 'create_issue' %}">Create one</a>.</p>
 {% endfor %}
 </table>
 

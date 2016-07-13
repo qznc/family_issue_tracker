@@ -1,0 +1,3 @@
+[submodule "sub/django-sandstorm"]
+	path = sub/django-sandstorm
+	url = https://github.com/phildini/django-sandstorm.git
