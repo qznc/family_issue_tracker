@@ -5,9 +5,9 @@
 <p><a href="{% url 'edit_issue' issue.id %}">edit</a></p>
 <p>{{ issue.description }}</p>
 <table>
-<tr><td>Created</td><td>{{ issue.created }}</td></tr>
+<tr><td>Created</td><td>{{ issue.created|date:"Y-m-d H:i e" }}</td></tr>
 {% if issue.closed %}
-<tr><td>Closed</td><td>{{ issue.closed }}</td></tr>
+<tr><td>Closed</td><td>{{ issue.closed|date:"Y-m-d H:i e" }}</td></tr>
 {% endif %}
 </table>
 <ol class="comments">
