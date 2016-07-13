@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% load markdown_deux_tags %}
 
 {% block content %}
 <h2>{{ issue.title }}</h2>
 <p>{{ issue.description|markdown }}</p>
 <table class="issuemeta">
-<tr><td>Created</td><td>{{ issue.created|date:"Y-m-d H:i e" }}</td></tr>
+<tr><td>{% trans "Created" %}</td><td>{{ issue.created|date:"Y-m-d H:i e" }}</td></tr>
 {% if issue.closed %}
-<tr><td>Closed</td><td>{{ issue.closed|date:"Y-m-d H:i e" }}</td></tr>
+<tr><td>{% trans "Closed" %}</td><td>{{ issue.closed|date:"Y-m-d H:i e" }}</td></tr>
 {% endif %}
-<tr><td>Creator</td><td>{{ issue.creator }}</td></tr>
+<tr><td>{% trans "Creator" %}</td><td>{{ issue.creator }}</td></tr>
 </table>
 <div class="issue_modifiers">
-	<a id="edit_issue" href="{% url 'edit_issue' issue.id %}">Edit</a>
+	<a id="edit_issue" href="{% url 'edit_issue' issue.id %}">{% trans "Edit" %}</a>
 	{% if issue.closed == None %}
 	<form method="POST" action="{% url 'close_issue' %}">
 	{% else %}
@@ -22,15 +22,15 @@
 	{% csrf_token %}
 	<input type="hidden" name="issue_id" value="{{issue.id}}" />
 	{% if issue.closed == None %}
-	<button>Close</button>
+	<button>{% trans "Close" %}</button>
 	{% else %}
-	<button>Reopen</button>
+	<button>{% trans "Reopen" %}</button>
 	{% endif %}
 	</form>
 </div>
 <ol class="comments">
 {% for comment in issue.comments.all %}
-<li><p>{{ comment.body|markdown }}</p><p>by {{comment.creator}}</li>
+<li><p>{{ comment.body|markdown }}</p><p>{% trans "by" %} {{comment.creator}}</li>
 {% endfor %}
 <li><form method="POST" action="{% url 'create_comment' %}">
 {% csrf_token %}

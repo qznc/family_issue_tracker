@@ -1,15 +1,18 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
+
 {% block content %}
 <table>
-<thead><th class="title">Title</th><th class="date">Created</th></thead>
+<thead><th class="title">{% trans "Title" %}</th><th class="date">{% trans "Created" %}</th></thead>
 {% for issue in issues %}
 <tr>
 <td class="title"><a href="{% url 'show_issue' issue.pk %}">{{ issue.title }}</a></td>
 <td class="date creation">{{ issue.created|date:"Y-m-d H:i e" }}</td>
 </tr>
 {% empty %}
-<p>No issues. <a href="{% url 'create_issue' %}">Create one</a>.</p>
+<p>{% trans "No issues." %}
+<a href="{% url 'create_issue' %}">{% trans "Create one" %}</a>.</p>
 {% endfor %}
 </table>
 

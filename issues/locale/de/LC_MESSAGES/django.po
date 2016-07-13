@@ -1,0 +1,105 @@
+# German Translation
+# Copyright (C) 2016 Andreas Zwinkau
+# This file is distributed under the same license as the PACKAGE package.
+# Andreas Zwinkau <qznc@web.de>, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-07-13 22:56+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: models.py:8
+msgid "title"
+msgstr "Titel"
+
+#: models.py:10
+msgid "description"
+msgstr "Beschreibung"
+
+#: models.py:13 models.py:43
+msgid "creator"
+msgstr "Ersteller"
+
+#: models.py:15 models.py:45
+msgid "created"
+msgstr "erstellt"
+
+#: models.py:17
+msgid "closed"
+msgstr "geschlossen"
+
+#: models.py:19
+msgid "for anonymous"
+msgstr "für Anonyme"
+
+#: models.py:22
+msgid "subscriber only"
+msgstr "Nur Teilnehmer"
+
+#: models.py:38
+msgid "issue"
+msgstr "Angelegenheit"
+
+#: models.py:41
+msgid "text body"
+msgstr "Textkörper"
+
+#: templates/edit_issue.html:13
+msgid "Submit"
+msgstr "Eintragen"
+
+#: templates/issue_list.html:7
+msgid "Title"
+msgstr "Titel"
+
+#: templates/issue_list.html:7 templates/show_issue.html:9
+msgid "Created"
+msgstr "Erstellt"
+
+#: templates/issue_list.html:14
+msgid "No issues."
+msgstr "Keine Angelegenheiten."
+
+#: templates/issue_list.html:15
+msgid "Create one"
+msgstr "Erstelle eine"
+
+#: templates/show_issue.html:11
+msgid "Closed"
+msgstr "Geschlossen"
+
+#: templates/show_issue.html:13
+msgid "Creator"
+msgstr "Ersteller"
+
+#: templates/show_issue.html:16
+msgid "Edit"
+msgstr "Ändern"
+
+#: templates/show_issue.html:25
+msgid "Close"
+msgstr "Schließen"
+
+#: templates/show_issue.html:27
+msgid "Reopen"
+msgstr "Wiederöffnen"
+
+#: templates/show_issue.html:33
+msgid "by"
+msgstr "von"
+
+msgid "Overview"
+msgstr "Übersicht"
+
+msgid "Create New"
+msgstr "Neu Erstellen"

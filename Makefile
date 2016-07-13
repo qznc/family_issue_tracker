@@ -12,7 +12,8 @@ $(SETUP_FLAG): requirements.txt
 	touch $(SETUP_FLAG)
 
 run: $(SETUP_FLAG) # start server
-	bash -c "source .env/bin/activate && ./manage.py migrate"
+	bash -c "source .env/bin/activate && ./manage.py migrate &&\
+		cd issues && django-admin compilemessages"
 	bash -c "source .env/bin/activate && ./manage.py runserver"
 
 superuser: $(SETUP_FLAG) # create a superuser in the database

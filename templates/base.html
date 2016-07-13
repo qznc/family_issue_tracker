@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load i18n %}
 <!doctype html>
 <html>
 <head>
@@ -13,8 +14,8 @@
 <header><div>
 <ol id="navigation">
 	<li><span id="textlogo">Family Issue Tracker</span></li>
-	<li><a href="{% url 'index' %}">Overview</a></li>
-	<li><a href="{% url 'create_issue' %}">Create New</a></li>
+	<li><a href="{% url 'index' %}">{% trans "Overview" %}</a></li>
+	<li><a href="{% url 'create_issue' %}">{% trans "Create New" %}</a></li>
 </ol>
 </div></header>
 <div id="content">

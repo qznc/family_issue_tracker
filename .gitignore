@@ -2,4 +2,7 @@
 db.sqlite3
 .sandstorm-env/
 .sandstorm/sandstorm-files.list
+*.mo
+*.txt.py
+*.html.py
 
