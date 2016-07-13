@@ -10,12 +10,12 @@
 {% endblock %}
 </head>
 <body>
-<header>
+<header><div>
 <ol id="navigation">
 	<li><a href="{% url 'index' %}">Overview</a></li>
 	<li><a href="{% url 'create_issue' %}">Create New</a></li>
 </ol>
-</header>
+</div></header>
 <div id="content">
 {% block content %}
 {% endblock %}
