@@ -9,6 +9,11 @@
 {% if issue.closed %}
 <tr><td>Closed</td><td>{{ issue.closed|date:"Y-m-d H:i e" }}</td></tr>
 {% endif %}
+<tr><td></td><td><form method="POST" action="{% url 'close_issue' %}">
+{% csrf_token %}
+<input type="hidden" name="issue_id" value="{{issue.id}}" />
+<button>Close</button>
+</form></td></tr>
 </table>
 <ol class="comments">
 {% for comment in issue.comments.all %}

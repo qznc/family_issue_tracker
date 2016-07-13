@@ -17,8 +17,8 @@ class CommentForm(ModelForm):
         widgets = {'issue': HiddenInput()}
 
 def index(request):
-    issues = Issue.objects.all();
-    context = dict(issues=issues)
+    open = Issue.objects.filter(closed=None).all();
+    context = dict(issues=open)
     return render(request, 'issue_list.html', context)
 
 def edit(request, id):
@@ -57,3 +57,8 @@ def create_comment(request):
     i = form.save()
     return redirect('show_issue', i.issue.pk)
 
+@require_POST
+def close_issue(request):
+    issue = get_object_or_404(Issue, pk=request.POST['issue_id'])
+    issue.close()
+    return redirect('index')

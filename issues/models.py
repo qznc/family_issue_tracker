@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 
 class Issue(models.Model):
@@ -13,6 +15,10 @@ class Issue(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def close(self):
+        self.closed = datetime.now()
+        self.save()
 
 class Comment(models.Model):
     issue = models.ForeignKey('Issue', on_delete=models.CASCADE,
