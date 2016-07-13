@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.views.decorators.http import require_POST
-from django.forms import ModelForm
+from django.forms import ModelForm, HiddenInput
 
 from .models import Issue, Comment
 
@@ -9,6 +9,12 @@ class IssueForm(ModelForm):
     class Meta:
         model = Issue
         fields = ('title', 'description', 'for_anon', 'subscriber_only')
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('body', 'issue')
+        widgets = {'issue': HiddenInput()}
 
 def index(request):
     issues = Issue.objects.all();
@@ -40,5 +46,14 @@ def create(request):
 
 def show(request, id):
     issue = get_object_or_404(Issue, pk=id)
-    context = dict(issue=issue)
+    cf = CommentForm()
+    context = dict(issue=issue, commentform=cf)
     return render(request, 'show_issue.html', context)
+
+@require_POST
+def create_comment(request):
+    form = CommentForm(request.POST)
+    assert form.is_valid()
+    i = form.save()
+    return redirect('show_issue', i.issue.pk)
+

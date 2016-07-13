@@ -14,5 +14,11 @@
 {% for comment in issue.comments.all %}
 <li><p>{{ comment.body }}</p></li>
 {% endfor %}
+<li><form method="POST" action="{% url 'create_comment' %}">
+{% csrf_token %}
+{{ commentform.body }}
+<input type="hidden" name="{{commentform.issue.name}}" value="{{issue.id}}" />
+<button>Comment</button>
+</form></li>
 </ol>
 {% endblock %}
