@@ -9,7 +9,7 @@ class Issue(models.Model):
     description = models.TextField(null=True, blank=True,
         verbose_name=_("description"),
         help_text="Editable text field")
-    creator = models.CharField(max_length=256, blank=True,
+    creator = models.ForeignKey('SandstormUser', null=True, blank=True,
         verbose_name=_("creator"))
     created = models.DateTimeField(auto_now_add=True,
         verbose_name=_("created"))
@@ -39,7 +39,13 @@ class Comment(models.Model):
         related_name="comments")
     body = models.TextField(
         verbose_name=_("text body"))
-    creator = models.CharField(max_length=256, blank=True,
+    creator = models.ForeignKey('SandstormUser', null=True, blank=True,
         verbose_name=_("creator"))
     created = models.DateTimeField(auto_now_add=True,
         verbose_name=_("created"))
+
+class SandstormUser(models.Model):
+    sid = models.CharField(max_length=32, primary_key=True)
+    name = models.CharField(max_length=1024)
+    handle = models.CharField(max_length=1024, null=True, blank=True)
+    gender = models.CharField(max_length=64)

@@ -10,7 +10,7 @@
 {% if issue.closed %}
 <tr><td>{% trans "Closed" %}</td><td>{{ issue.closed|date:"Y-m-d H:i e" }}</td></tr>
 {% endif %}
-<tr><td>{% trans "Creator" %}</td><td>{{ issue.creator }}</td></tr>
+<tr><td>{% trans "Creator" %}</td><td>{{ issue.creator.name }}</td></tr>
 </table>
 <div class="issue_modifiers">
 	<a id="edit_issue" href="{% url 'edit_issue' issue.id %}">{% trans "Edit" %}</a>
@@ -30,7 +30,7 @@
 </div>
 <ol class="comments">
 {% for comment in issue.comments.all %}
-<li><p>{{ comment.body|markdown }}</p><p>{% trans "by" %} {{comment.creator}}</li>
+<li><p>{{ comment.body|markdown }}</p><p>{% trans "by" %} {{comment.creator.name}}</li>
 {% endfor %}
 <li><form method="POST" action="{% url 'create_comment' %}">
 {% csrf_token %}

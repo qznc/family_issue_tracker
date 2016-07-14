@@ -3,7 +3,26 @@ from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 from django.forms import ModelForm, HiddenInput
 
-from .models import Issue, Comment
+from urllib.parse import unquote
+
+from .models import Issue, Comment, SandstormUser
+
+def remember_sandstorm_user(request):
+    sid = request.META.get('HTTP_X_SANDSTORM_USER_ID', None)
+    if sid == "anonym":
+        return None
+    name = unquote(request.META.get('HTTP_X_SANDSTORM_USERNAME', "name?"))
+    handle = request.META.get('HTTP_X_SANDSTORM_HANDLE', "handle?")
+    gender = request.META.get('HTTP_X_SANDSTORM_PREFERRED_PRONOUNS', "gender?")
+    try:
+        u = SandstormUser.objects.get(sid=sid)
+        u.name = name
+        u.handle = handle
+        u.gender = gender
+    except SandstormUser.DoesNotExist:
+        u = SandstormUser(sid=sid,name=name,handle=handle,gender=gender)
+    u.save()
+    return u
 
 class IssueForm(ModelForm):
     class Meta:
@@ -35,10 +54,11 @@ def edit(request, id):
 
 def create(request):
     if request.method == "POST":
+        u = remember_sandstorm_user(request)
         form = IssueForm(request.POST)
         if form.is_valid():
             i = form.save(commit=False)
-            i.creator = request.META.get('HTTP_X_SANDSTORM_USER_ID', "anonym")
+            i.creator = u
             i.save()
             return redirect('show_issue', i.pk)
     else:
@@ -56,8 +76,9 @@ def show(request, id):
 def create_comment(request):
     form = CommentForm(request.POST)
     assert form.is_valid()
+    u = remember_sandstorm_user(request)
     i = form.save(commit=False)
-    i.creator = request.META.get('HTTP_X_SANDSTORM_USER_ID', "anonym")
+    i.creator = u
     i.save()
     return redirect('show_issue', i.issue.pk)
 
