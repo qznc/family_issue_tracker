@@ -38,7 +38,7 @@ def create(request):
         form = IssueForm(request.POST)
         if form.is_valid():
             i = form.save(commit=False)
-            i.creator = getattr(request.user, 'first_name', 'anonym')
+            i.creator = request.META.get('HTTP_X_SANDSTORM_USER_ID', "anonym")
             i.save()
             return redirect('show_issue', i.pk)
     else:
@@ -57,7 +57,7 @@ def create_comment(request):
     form = CommentForm(request.POST)
     assert form.is_valid()
     i = form.save(commit=False)
-    i.creator = getattr(request.user, 'first_name', 'anonym')
+    i.creator = request.META.get('HTTP_X_SANDSTORM_USER_ID', "anonym")
     i.save()
     return redirect('show_issue', i.issue.pk)
 
