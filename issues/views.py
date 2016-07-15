@@ -9,11 +9,9 @@ from urllib.parse import unquote
 from .models import Issue, Comment, SandstormUser
 
 def remember_sandstorm_user(request):
-    sid = request.META.get('HTTP_X_SANDSTORM_USER_ID', None)
-    if sid == "anonym":
-        return None
-    name = unquote(request.META.get('HTTP_X_SANDSTORM_USERNAME', "anon"))
-    handle = request.META.get('HTTP_X_SANDSTORM_HANDLE', "an")
+    sid = request.META.get('HTTP_X_SANDSTORM_USER_ID', "anonym")
+    name = unquote(request.META.get('HTTP_X_SANDSTORM_USERNAME', "Anonymous User"))
+    handle = request.META.get('HTTP_X_SANDSTORM_HANDLE', "anon")
     gender = request.META.get('HTTP_X_SANDSTORM_PREFERRED_PRONOUNS', "female")
     try:
         u = SandstormUser.objects.get(sid=sid)
