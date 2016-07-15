@@ -7,23 +7,25 @@
 {% endif %}
 <h1>{{ user.name }}</h1>
 <h2>{% trans "Responsibilities" %}</h2>
-<table class="issuelist">
-<thead>
-<th class="id">#</th>
-<th class="title">{% trans "Title" %}</th>
-<th class="date">{% trans "Deadline" %}</th></thead>
-{% for issue in responsible %}
-	<tr>
-	<td class="id"><a href="{% url 'show_issue' issue.pk %}">{{ issue.pk }}</a></td>
-	<td class="title"><a href="{% url 'show_issue' issue.pk %}">{{ issue.title }}</a></td>
-	{% if issue.deadline %}
-	<td class="date deadline {{issue.deadline_css_classes}}">{{ issue.deadline|date:"Y-m-d" }}</td>
-	{% else %}
-	<td class="date deadline">–</td>
-	{% endif %}
-	</tr>
-{% empty %}
-<p>{% trans "No issues." %}
-{% endfor %}
-</table>
+{% if responsible %}
+	<table class="issuelist">
+	<thead>
+	<th class="id">#</th>
+	<th class="title">{% trans "Title" %}</th>
+	<th class="date">{% trans "Deadline" %}</th></thead>
+	{% for issue in responsible %}
+		<tr>
+		<td class="id"><a href="{% url 'show_issue' issue.pk %}">{{ issue.pk }}</a></td>
+		<td class="title"><a href="{% url 'show_issue' issue.pk %}">{{ issue.title }}</a></td>
+		{% if issue.deadline %}
+		<td class="date deadline {{issue.deadline_css_classes}}">{{ issue.deadline|date:"Y-m-d" }}</td>
+		{% else %}
+		<td class="date deadline">–</td>
+		{% endif %}
+		</tr>
+	{% endfor %}
+	</table>
+{% else %}
+	<p>{% trans "No responsibilities." %}</p>
+{% endif %}
 {% endblock %}
