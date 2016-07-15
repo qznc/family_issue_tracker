@@ -9,12 +9,15 @@ def remember_sandstorm_user(request):
     gender = request.META.get('HTTP_X_SANDSTORM_PREFERRED_PRONOUNS', "female")
     try:
         u = SandstormUser.objects.get(sid=sid)
+        if u.name == name and u.handle == handle and u.gender == gender:
+            return u
         u.name = name
         u.handle = handle
         u.gender = gender
+        u.save(force_update=True)
     except SandstormUser.DoesNotExist:
         u = SandstormUser(sid=sid,name=name,handle=handle,gender=gender)
-    u.save()
+        u.save(force_insert=True)
     return u
 
 class SandstormUserRemembering:

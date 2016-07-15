@@ -22,13 +22,13 @@ class IssuesTests(TestCase):
     def test_setup_state(self):
         """Does not change state"""
         c = Client()
-        with self.assertNumQueries(7): # FIXME should be less
+        with self.assertNumQueries(5): # TODO should be less
             r = c.get("/", follow=True)
         self.assertEqual(r.status_code, 200)
         assert "<html" in r.content.decode("utf8")
         assert len(r.context['issues']) == 3
 
-        with self.assertNumQueries(7): # FIXME should be less
+        with self.assertNumQueries(6): # TODO should be less
             r = c.get("/i/1")
         self.assertEquals(r.status_code, 200)
         assert "<html" in r.content.decode("utf8")
@@ -41,13 +41,14 @@ class IssuesTests(TestCase):
     def test_creation(self):
         """Adding an issue and a comment"""
         c = Client()
-        with self.assertNumQueries(4): # FIXME should be less
+        with self.assertNumQueries(3): # TODO should be less
             r = c.get("/i/create", follow=True)
         self.assertEqual(r.status_code, 200)
         assert "<form" in r.content.decode("utf8")
 
         self.assertEqual(len(Issue.objects.all()), 3)
-        r = c.post("/i/create", dict(title="My Issue", description="Yeah"), follow=True)
+        with self.assertNumQueries(6): # TODO should be less
+            r = c.post("/i/create", dict(title="My Issue", description="Yeah"), follow=True)
         self.assertEqual(r.status_code, 200)
         self.assertEqual(len(Issue.objects.all()), 4)
         issue = r.context['issue']
