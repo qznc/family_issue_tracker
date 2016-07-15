@@ -58,7 +58,8 @@ def create(request):
     return render(request, 'edit_issue.html', context)
 
 def show(request, id):
-    issue = get_object_or_404(Issue.objects.select_related('creator'), pk=id)
+    qs = Issue.objects.select_related('creator')
+    issue = get_object_or_404(qs, pk=id)
     cf = CommentForm()
     context = dict(issue=issue, commentform=cf)
     return render(request, 'show_issue.html', context)

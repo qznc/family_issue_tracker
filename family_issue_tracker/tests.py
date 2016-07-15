@@ -1,4 +1,5 @@
 from django.test import TestCase, Client
+from django.core.urlresolvers import reverse
 
 from issues.models import Issue, Comment, SandstormUser
 
@@ -41,8 +42,8 @@ class IssuesTests(TestCase):
     def test_creation(self):
         """Adding an issue and a comment"""
         c = Client()
-        with self.assertNumQueries(3): # TODO should be less
-            r = c.get("/i/create", follow=True)
+        with self.assertNumQueries(3):
+            r = c.get(reverse("create_issue"))
         self.assertEqual(r.status_code, 200)
         assert "<form" in r.content.decode("utf8")
 
@@ -58,8 +59,13 @@ class IssuesTests(TestCase):
         self.assertEqual(len(comments), 0)
 
         self.assertEqual(len(Comment.objects.all()), 2)
-        r = c.post("/i/create_comment", dict(body="My Comment", issue=issue.id), follow=True)
-        self.assertEqual(r.status_code, 200)
+        with self.assertNumQueries(4): # TODO should be less
+            r = c.post("/i/create_comment", dict(body="My Comment", issue=issue.id))
+        self.assertEqual(r.status_code, 302)
         self.assertEqual(len(Comment.objects.all()), 3)
+
+        with self.assertNumQueries(4): # TODO should be less
+            r = c.get(r.url)
+        self.assertEqual(r.status_code, 200)
         comments = r.context['issue'].comments.all()
         self.assertEqual(len(comments), 1)
