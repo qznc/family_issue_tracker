@@ -44,25 +44,30 @@ th { font-weight: normal; }
 
 #navigation li { list-style-type: none; }
 
-/* COLOR */
+/* COLOR
+ * Nearly Black: #331b12
+ * Dark: #81442d
+ * Middle: #d7714c
+ * Light: #fabb48
+ */
 body { background-color: #fff; color: #010; }
-footer { background-color: #040; color: #eee; }
+footer { background-color: #d7714c; color: #eee; }
 
-a { color: #040; }
-a:hover { color: #090; }
+a { color: #331b12; }
+a:hover { color: #d7714c; }
 
 button,
 #edit_issue,
-header ol li a { border: 1px solid #aaa; border-radius: 0.3rem; }
+header ol li a { border: 1px solid #81442d; border-radius: 0.3rem; }
 
-button { background-color: #afa; border-color: #5a5; }
+button { background-color: #fabb48; }
 
 #edit_issue,
 a:visited,
 td.id a,
 header a { text-decoration: none; }
 
-ol.comments li { border-left: 0.3rem solid #ccc; padding-left: 1rem; }
+ol.comments li { border-left: 0.3rem solid #d7714c; padding-left: 1rem; }
 
 .comments .signature,
 td.id a,
@@ -71,14 +76,16 @@ td.date { color: #777; }
 
 hr.clear { color: transparent; width: 0; }
 
-.deadline.missed { background-color: #533; color: #fff; }
+.deadline.missed { background-color: #d7714c; color: #fff; }
 .deadline.today { background-color: #b00; color: #fff; }
-.deadline.within_week { background-color: #fdd; color: #000; }
+.deadline.within_week { background-color: #fabb48; color: #000; }
 
 table.issuelist,
 .issuelist th { border-bottom: 1px solid #000; }
 
 /* POSITION */
+
+#logo { float: left; margin: 0 3rem 1rem 0; }
 
 table.issuemeta { margin: 1rem 0; }
 
@@ -105,11 +112,9 @@ img.profile { float: right; }
 header ol { display: flex; }
 header ol li { flex: 1 0 auto; text-align: center; }
 header ol li+li { margin-left: 1rem; }
-#textlogo,
 header ol li a { display: block; padding: 0.6rem 0; }
 
-#textlogo { display: block; text-align: left; }
-
+#content,
 hr.clear,
 footer,
 ol.comments { clear: both; }

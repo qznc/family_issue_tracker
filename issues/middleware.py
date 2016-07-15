@@ -19,6 +19,8 @@ def remember_sandstorm_user(request):
     handle = request.META.get('HTTP_X_SANDSTORM_HANDLE', "anon")
     gender = request.META.get('HTTP_X_SANDSTORM_PREFERRED_PRONOUNS', "female")
     image_url = request.META.get('HTTP_X_SANDSTORM_USER_PICTURE', None)
+    perms = request.META.get('HTTP_X_SANDSTORM_PERMISSIONS', "")
+    print("perms", perms)
     try:
         u = SandstormUser.objects.get(sid=sid)
         if u.name == name and u.handle == handle and u.gender == gender and u.image_url == image_url:
