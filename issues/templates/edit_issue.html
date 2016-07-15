@@ -4,10 +4,10 @@
 {% block content %}
 <form method="POST">
 {{ form.non_field_errors }}
-<table>
+<table class="editissue">
 {% csrf_token %}
 {% for field in form %}
-<tr><td>{{ field.label_tag }}</td><td>{{ field }} {{ field.errors }}</td></tr>
+<tr><th>{{ field.label_tag }}</th><td>{{ field }} {{ field.errors }}</td></tr>
 {% endfor %}
 </table>
 <button>{% trans "Submit" %}</button>

@@ -32,7 +32,7 @@
 </div>
 <ol class="comments">
 {% for comment in issue.comments.all %}
-<li><p>{{ comment.body|markdown }}</p><p>{% trans "by" %} {{comment.creator.name}}</li>
+<li class="comment"><p>{{ comment.body|markdown }}</p><p class="signature">{% trans "by" %} {{comment.creator.name}}</li>
 {% endfor %}
 <li><form method="POST" action="{% url 'create_comment' %}">
 {% csrf_token %}
