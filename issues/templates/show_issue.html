@@ -6,13 +6,17 @@
 <h2>{{ issue.title }}</h2>
 <p>{{ issue.description|markdown }}</p>
 <table class="issuemeta">
-<tr><td>{% trans "Responsible" %}</td><td>{{ issue.responsible|default_if_none:"–" }}</td></tr>
+{% if issue.responsible %}
+	<tr><td>{% trans "Responsible" %}</td><td><a href="{% url "show_user" issue.responsible.sid %}">{{ issue.responsible }}</a></td></tr>
+{% else %}
+	<tr><td>{% trans "Responsible" %}</td><td>–</td></tr>
+{% endif %}
 <tr><td>{% trans "Deadline" %}</td><td>{{ issue.deadline|date:"Y-m-d H:i e" }}</td></tr>
 <tr><td>{% trans "Created" %}</td><td>{{ issue.created|date:"Y-m-d H:i e" }}</td></tr>
 {% if issue.closed %}
 <tr><td>{% trans "Closed" %}</td><td>{{ issue.closed|date:"Y-m-d H:i e" }}</td></tr>
 {% endif %}
-<tr><td>{% trans "Creator" %}</td><td>{{ issue.creator.name }}</td></tr>
+<tr><td>{% trans "Creator" %}</td><td><a href="{% url "show_user" issue.creator.pk %}">{{ issue.creator.name }}</a></td></tr>
 </table>
 <div class="issue_modifiers">
 	<a id="edit_issue" href="{% url 'edit_issue' issue.id %}">{% trans "Edit" %}</a>

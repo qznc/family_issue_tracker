@@ -104,3 +104,10 @@ def reopen_issue(request):
     issue = get_object_or_404(Issue, pk=request.POST['issue_id'])
     issue.reopen()
     return redirect('show_issue', issue.pk)
+
+def show_user(request, id):
+    u = get_object_or_404(SandstormUser, pk=id)
+    responsible = Issue.objects.filter(closed=None)\
+        .filter(responsible=u).all();
+    context = dict(user=u, responsible=responsible)
+    return render(request, 'show_sandstorm_user.html', context)
