@@ -19,7 +19,7 @@ class IssuesTests(TestCase):
     def test_setup_state(self):
         """Does not change state"""
         c = Client()
-        with self.assertNumQueries(1):
+        with self.assertNumQueries(2):
             r = c.get("/", follow=True)
         self.assertEqual(r.status_code, 200)
         assert "<html" in r.content.decode("utf8")

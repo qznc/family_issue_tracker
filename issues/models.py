@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date, timedelta
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -13,7 +13,7 @@ class Issue(models.Model):
         verbose_name=_("creator"))
     created = models.DateTimeField(auto_now_add=True,
         verbose_name=_("created"))
-    deadline = models.DateTimeField(null=True, blank=True,
+    deadline = models.DateField(null=True, blank=True,
         verbose_name=_("deadline"))
     closed = models.DateTimeField(null=True, blank=True,
         verbose_name=_("closed"))
@@ -36,6 +36,20 @@ class Issue(models.Model):
     def reopen(self):
         self.closed = None
         self.save()
+
+    def deadline_css_classes(self):
+        dead = self.deadline
+        if not dead:
+            return ""
+        today = date.today()
+        print(today, "vs", dead)
+        if dead == today:
+            return "today"
+        if dead < today:
+            return "missed"
+        if dead < today + timedelta(days=7):
+            return "within_week"
+        return ""
 
 class Comment(models.Model):
     issue = models.ForeignKey('Issue', on_delete=models.CASCADE,

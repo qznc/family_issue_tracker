@@ -10,12 +10,16 @@
 <th class="responsible">{% trans "Responsible" %}</th>
 <th class="date">{% trans "Deadline" %}</th></thead>
 {% for issue in issues %}
-<tr>
-<td class="id"><a href="{% url 'show_issue' issue.pk %}">{{ issue.pk }}</a></td>
-<td class="title"><a href="{% url 'show_issue' issue.pk %}">{{ issue.title }}</a></td>
-<td class="responsible">{{ issue.responsible|default_if_none:"–" }}</td>
-<td class="date deadline">{{ issue.deadline|date:"Y-m-d" }}</td>
-</tr>
+	<tr>
+	<td class="id"><a href="{% url 'show_issue' issue.pk %}">{{ issue.pk }}</a></td>
+	<td class="title"><a href="{% url 'show_issue' issue.pk %}">{{ issue.title }}</a></td>
+	<td class="responsible">{{ issue.responsible|default_if_none:"–" }}</td>
+	{% if issue.deadline %}
+	<td class="date deadline {{issue.deadline_css_classes}}">{{ issue.deadline|date:"Y-m-d" }}</td>
+	{% else %}
+	<td class="date deadline">–</td>
+	{% endif %}
+	</tr>
 {% empty %}
 <p>{% trans "No issues." %}
 <a href="{% url 'create_issue' %}">{% trans "Create one" %}</a>.</p>

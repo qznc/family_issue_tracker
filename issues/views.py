@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 from django.forms import ModelForm, HiddenInput, DateTimeInput, DateInput
+from django.db.models import Q
 
 from urllib.parse import unquote
 
@@ -42,8 +43,12 @@ class CommentForm(ModelForm):
         widgets = {'issue': HiddenInput()}
 
 def index(request):
-    open = Issue.objects.filter(closed=None).all();
-    context = dict(issues=open)
+    deadlined = Issue.objects.filter(closed=None)\
+        .exclude(deadline=None).order_by('deadline', 'pk')\
+        .all();
+    open = Issue.objects.filter(closed=None)\
+        .filter(deadline=None).all();
+    context = dict(issues=list(deadlined)+list(open))
     return render(request, 'issue_list.html', context)
 
 def edit(request, id):

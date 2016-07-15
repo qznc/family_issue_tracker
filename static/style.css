@@ -67,6 +67,10 @@ td.date { color: #777; }
 
 hr.clear { color: transparent; width: 0; }
 
+.deadline.missed { color: #a00; }
+.deadline.today { background-color: #a00; color: #fff; }
+.deadline.within_week { background-color: #fdd; color: #000; }
+
 /* POSITION */
 
 table.issuemeta { margin: 1rem 0; }
@@ -86,7 +90,7 @@ ol.comments { padding-left: 0; list-style-type: none; }
 ol.comments { padding: 1rem 0; }
 
 th { text-align: left; }
-th.date, td.date { padding-left: 2rem; }
+th.date, td.date { padding: 0 1rem; }
 
 header ol { display: flex; }
 header ol li { flex: 1 0 auto; text-align: center; }
