@@ -28,7 +28,7 @@ class IssuesTests(TestCase):
         assert "<html" in r.content.decode("utf8")
         assert len(r.context['issues']) == 3
 
-        with self.assertNumQueries(6): # TODO should be less
+        with self.assertNumQueries(5): # TODO should be less
             r = c.get("/i/1")
         self.assertEquals(r.status_code, 200)
         assert "<html" in r.content.decode("utf8")
@@ -47,7 +47,7 @@ class IssuesTests(TestCase):
         assert "<form" in r.content.decode("utf8")
 
         self.assertEqual(len(Issue.objects.all()), 3)
-        with self.assertNumQueries(6): # TODO should be less
+        with self.assertNumQueries(5): # TODO should be less
             r = c.post("/i/create", dict(title="My Issue", description="Yeah"), follow=True)
         self.assertEqual(r.status_code, 200)
         self.assertEqual(len(Issue.objects.all()), 4)
