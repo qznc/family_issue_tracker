@@ -35,7 +35,7 @@
 	</form>
 </div>
 <ol class="comments">
-{% for comment in issue.comments.all %}
+{% for comment in issue.allComments %}
 <li class="comment"><p>{{ comment.body|markdown }}</p><p class="signature">{% trans "by" %} {{comment.creator.name}}</li>
 {% endfor %}
 <li><form method="POST" action="{% url 'create_comment' %}">

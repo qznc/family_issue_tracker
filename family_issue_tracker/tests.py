@@ -29,7 +29,7 @@ class IssuesTests(TestCase):
         assert "<html" in r.content.decode("utf8")
         assert len(r.context['issues']) == 3
 
-        with self.assertNumQueries(5): # TODO should be less
+        with self.assertNumQueries(3):
             r = c.get("/i/1")
         self.assertEquals(r.status_code, 200)
         assert "<html" in r.content.decode("utf8")
@@ -59,12 +59,12 @@ class IssuesTests(TestCase):
         self.assertEqual(len(comments), 0)
 
         self.assertEqual(len(Comment.objects.all()), 2)
-        with self.assertNumQueries(4): # TODO should be less
+        with self.assertNumQueries(4):
             r = c.post("/i/create_comment", dict(body="My Comment", issue=issue.id))
         self.assertEqual(r.status_code, 302)
         self.assertEqual(len(Comment.objects.all()), 3)
 
-        with self.assertNumQueries(4): # TODO should be less
+        with self.assertNumQueries(3):
             r = c.get(r.url)
         self.assertEqual(r.status_code, 200)
         comments = r.context['issue'].comments.all()

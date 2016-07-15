@@ -51,6 +51,9 @@ class Issue(models.Model):
             return "within_week"
         return ""
 
+    def allComments(self):
+        return Comment.objects.select_related('creator').filter(issue=self).all()
+
 class Comment(models.Model):
     issue = models.ForeignKey('Issue', on_delete=models.CASCADE,
         verbose_name=_("issue"),
