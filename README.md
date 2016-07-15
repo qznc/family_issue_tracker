@@ -17,3 +17,10 @@ We assume you have set up your local sandstorm development stuff.
 
     vagrant-spk up # create VM
     vagrant-spk dev # inject App
+
+## License
+
+This software uses the GNU Affero GPL v3.
+See LICENSE.txt for details.
+Essentially, this is like the well-known GPL, but it also works for servers.
+Anybody who runs this service must also supply the sources.
