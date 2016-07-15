@@ -6,6 +6,7 @@
 <h2>{{ issue.title }}</h2>
 <p>{{ issue.description|markdown }}</p>
 <table class="issuemeta">
+<tr><td>{% trans "Responsible" %}</td><td>{{ issue.responsible }}</td></tr>
 <tr><td>{% trans "Created" %}</td><td>{{ issue.created|date:"Y-m-d H:i e" }}</td></tr>
 {% if issue.closed %}
 <tr><td>{% trans "Closed" %}</td><td>{{ issue.closed|date:"Y-m-d H:i e" }}</td></tr>

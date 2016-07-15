@@ -21,8 +21,10 @@ class Issue(models.Model):
     subscriber_only = models.BooleanField(default=False,
         verbose_name=_("subscriber only"),
         help_text="Only subscribers see this issue")
+    responsible = models.ForeignKey('SandstormUser', null=True, blank=True,
+        related_name="working_on", verbose_name=_("responsible"))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def close(self):
@@ -45,7 +47,10 @@ class Comment(models.Model):
         verbose_name=_("created"))
 
 class SandstormUser(models.Model):
-    sid = models.CharField(max_length=32, primary_key=True)
+    sid = models.CharField(max_length=32, primary_key=True, default="anon")
     name = models.CharField(max_length=1024)
     handle = models.CharField(max_length=1024, null=True, blank=True)
     gender = models.CharField(max_length=64)
+
+    def __str__(self):
+        return self.name

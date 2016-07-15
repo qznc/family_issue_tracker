@@ -38,7 +38,7 @@ class IssuesTests(TestCase):
     def test_creation(self):
         """Adding an issue and a comment"""
         c = Client()
-        with self.assertNumQueries(0):
+        with self.assertNumQueries(1):
             r = c.get("/i/create", follow=True)
         self.assertEqual(r.status_code, 200)
         assert "<form" in r.content.decode("utf8")

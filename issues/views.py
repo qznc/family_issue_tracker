@@ -27,7 +27,7 @@ def remember_sandstorm_user(request):
 class IssueForm(ModelForm):
     class Meta:
         model = Issue
-        fields = ('title', 'description', 'for_anon', 'subscriber_only')
+        fields = ('title', 'description', 'for_anon', 'subscriber_only', 'responsible')
 
 class CommentForm(ModelForm):
     class Meta:
