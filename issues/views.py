@@ -4,24 +4,7 @@ from django.views.decorators.http import require_POST
 from django.forms import ModelForm, HiddenInput, DateTimeInput, DateInput
 from django.db.models import Q
 
-from urllib.parse import unquote
-
 from .models import Issue, Comment, SandstormUser
-
-def remember_sandstorm_user(request):
-    sid = request.META.get('HTTP_X_SANDSTORM_USER_ID', "anonym")
-    name = unquote(request.META.get('HTTP_X_SANDSTORM_USERNAME', "Anonymous User"))
-    handle = request.META.get('HTTP_X_SANDSTORM_HANDLE', "anon")
-    gender = request.META.get('HTTP_X_SANDSTORM_PREFERRED_PRONOUNS', "female")
-    try:
-        u = SandstormUser.objects.get(sid=sid)
-        u.name = name
-        u.handle = handle
-        u.gender = gender
-    except SandstormUser.DoesNotExist:
-        u = SandstormUser(sid=sid,name=name,handle=handle,gender=gender)
-    u.save()
-    return u
 
 class MyDateTimeInput(DateInput):
     input_type = 'date'
@@ -63,11 +46,10 @@ def edit(request, id):
 
 def create(request):
     if request.method == "POST":
-        u = remember_sandstorm_user(request)
         form = IssueForm(request.POST)
         if form.is_valid():
             i = form.save(commit=False)
-            i.creator = u
+            i.creator = request.sandstorm_user
             i.save()
             return redirect('show_issue', i.pk)
     else:
@@ -85,9 +67,8 @@ def show(request, id):
 def create_comment(request):
     form = CommentForm(request.POST)
     assert form.is_valid()
-    u = remember_sandstorm_user(request)
     i = form.save(commit=False)
-    i.creator = u
+    i.creator = request.sandstorm_user
     i.save()
     return redirect('show_issue', i.issue.pk)
 

@@ -50,6 +50,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'issues.middleware.SandstormUserRemembering',
 ]
 
 ROOT_URLCONF = 'family_issue_tracker.urls'
