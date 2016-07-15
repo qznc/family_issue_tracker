@@ -4,10 +4,14 @@
 
 {% block content %}
 <table>
-<thead><th class="title">{% trans "Title" %}</th><th class="date">{% trans "Created" %}</th></thead>
+<thead>
+<th class="title">{% trans "Title" %}</th>
+<th class="responsible">{% trans "Responsible" %}</th>
+<th class="date">{% trans "Created" %}</th></thead>
 {% for issue in issues %}
 <tr>
 <td class="title"><a href="{% url 'show_issue' issue.pk %}">{{ issue.title }}</a></td>
+<td class="responsible">{{ issue.responsible|default_if_none:"–" }}</td>
 <td class="date creation">{{ issue.created|date:"Y-m-d H:i e" }}</td>
 </tr>
 {% empty %}
