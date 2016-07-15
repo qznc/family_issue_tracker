@@ -42,7 +42,6 @@ class Issue(models.Model):
         if not dead:
             return ""
         today = date.today()
-        print(today, "vs", dead)
         if dead == today:
             return "today"
         if dead < today:
