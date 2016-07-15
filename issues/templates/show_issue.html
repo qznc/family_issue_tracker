@@ -36,7 +36,9 @@
 </div>
 <ol class="comments">
 {% for comment in issue.allComments %}
-<li class="comment"><p>{{ comment.body|markdown }}</p><p class="signature">{% trans "by" %} {{comment.creator.name}}</li>
+<li class="comment"><p>{{ comment.body|markdown }}</p>
+<p class="signature">{{comment.creator.name}}
+· <time datetime="{{comment.created|date:"c"}}">{{comment.created|date:"Y-m-d H:i e"}}</time></li>
 {% endfor %}
 <li><form method="POST" action="{% url 'create_comment' %}">
 {% csrf_token %}
