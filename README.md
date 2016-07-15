@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/qznc/family_issue_tracker.svg?branch=master)](https://travis-ci.org/qznc/family_issue_tracker)
+
 # Family Issue Tracker
 
 An issue tracker targeted at families and other users,
