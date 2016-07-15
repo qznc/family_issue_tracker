@@ -5,11 +5,13 @@
 {% block content %}
 <table>
 <thead>
+<th class="id">#</th>
 <th class="title">{% trans "Title" %}</th>
 <th class="responsible">{% trans "Responsible" %}</th>
 <th class="date">{% trans "Deadline" %}</th></thead>
 {% for issue in issues %}
 <tr>
+<td class="id"><a href="{% url 'show_issue' issue.pk %}">{{ issue.pk }}</a></td>
 <td class="title"><a href="{% url 'show_issue' issue.pk %}">{{ issue.title }}</a></td>
 <td class="responsible">{{ issue.responsible|default_if_none:"–" }}</td>
 <td class="date deadline">{{ issue.deadline|date:"Y-m-d" }}</td>
