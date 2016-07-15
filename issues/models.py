@@ -70,6 +70,7 @@ class SandstormUser(models.Model):
     name = models.CharField(max_length=1024)
     handle = models.CharField(max_length=1024, null=True, blank=True)
     gender = models.CharField(max_length=64)
+    image_url = models.CharField(max_length=1024, null=True, blank=True)
 
     def __str__(self):
         return self.name

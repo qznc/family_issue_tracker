@@ -100,6 +100,8 @@ th.id, td.id { text-align: right; padding: 0.2rem 0.3rem; }
 th { text-align: left; }
 th.date, td.date { padding: 0 1rem; }
 
+img.profile { float: right; }
+
 header ol { display: flex; }
 header ol li { flex: 1 0 auto; text-align: center; }
 header ol li+li { margin-left: 1rem; }

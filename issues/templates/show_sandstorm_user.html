@@ -2,6 +2,9 @@
 {% load i18n %}
 
 {% block content %}
+{% if user.image_url %}
+<img class="profile" src="{{ user.image_url }}" />
+{% endif %}
 <h1>{{ user.name }}</h1>
 <h2>{% trans "Responsibilities" %}</h2>
 <table class="issuelist">
