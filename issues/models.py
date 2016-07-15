@@ -13,6 +13,8 @@ class Issue(models.Model):
         verbose_name=_("creator"))
     created = models.DateTimeField(auto_now_add=True,
         verbose_name=_("created"))
+    deadline = models.DateTimeField(null=True, blank=True,
+        verbose_name=_("deadline"))
     closed = models.DateTimeField(null=True, blank=True,
         verbose_name=_("closed"))
     for_anon = models.BooleanField(default=False,

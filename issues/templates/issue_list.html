@@ -7,12 +7,12 @@
 <thead>
 <th class="title">{% trans "Title" %}</th>
 <th class="responsible">{% trans "Responsible" %}</th>
-<th class="date">{% trans "Created" %}</th></thead>
+<th class="date">{% trans "Deadline" %}</th></thead>
 {% for issue in issues %}
 <tr>
 <td class="title"><a href="{% url 'show_issue' issue.pk %}">{{ issue.title }}</a></td>
 <td class="responsible">{{ issue.responsible|default_if_none:"–" }}</td>
-<td class="date creation">{{ issue.created|date:"Y-m-d H:i e" }}</td>
+<td class="date deadline">{{ issue.deadline|date:"Y-m-d" }}</td>
 </tr>
 {% empty %}
 <p>{% trans "No issues." %}

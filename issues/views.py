@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.views.decorators.http import require_POST
-from django.forms import ModelForm, HiddenInput
+from django.forms import ModelForm, HiddenInput, DateTimeInput, DateInput
 
 from urllib.parse import unquote
 
@@ -24,10 +24,16 @@ def remember_sandstorm_user(request):
     u.save()
     return u
 
+class MyDateTimeInput(DateInput):
+    input_type = 'date'
+
 class IssueForm(ModelForm):
     class Meta:
         model = Issue
-        fields = ('title', 'description', 'for_anon', 'subscriber_only', 'responsible')
+        fields = ('title', 'description',
+            'for_anon', 'subscriber_only',
+            'responsible', 'deadline')
+        widgets = {'deadline': MyDateTimeInput()}
 
 class CommentForm(ModelForm):
     class Meta:
