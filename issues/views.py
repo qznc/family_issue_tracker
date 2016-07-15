@@ -12,9 +12,9 @@ def remember_sandstorm_user(request):
     sid = request.META.get('HTTP_X_SANDSTORM_USER_ID', None)
     if sid == "anonym":
         return None
-    name = unquote(request.META.get('HTTP_X_SANDSTORM_USERNAME', "name?"))
-    handle = request.META.get('HTTP_X_SANDSTORM_HANDLE', "handle?")
-    gender = request.META.get('HTTP_X_SANDSTORM_PREFERRED_PRONOUNS', "gender?")
+    name = unquote(request.META.get('HTTP_X_SANDSTORM_USERNAME', "anon"))
+    handle = request.META.get('HTTP_X_SANDSTORM_HANDLE', "an")
+    gender = request.META.get('HTTP_X_SANDSTORM_PREFERRED_PRONOUNS', "female")
     try:
         u = SandstormUser.objects.get(sid=sid)
         u.name = name
