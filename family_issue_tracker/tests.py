@@ -1,31 +1,34 @@
 from django.test import TestCase, Client
 
-from issues.models import Issue, Comment
+from issues.models import Issue, Comment, SandstormUser
 
 class IssuesTests(TestCase):
     def setUp(self):
-        i1 = Issue(title="Foo", description="describe Foo")
+        u = SandstormUser(sid="xxxdummyxxx", name="Dummy User", handle="dummy")
+        u.save()
+
+        i1 = Issue(title="Foo", description="describe Foo", creator=u)
         i1.save()
-        i2 = Issue(title="Bar", description="describe Bar", for_anon=True)
+        i2 = Issue(title="Bar", description="describe Bar", for_anon=True, creator=u)
         i2.save()
-        i3 = Issue(title="Baz", description="describe Baz", subscriber_only=True)
+        i3 = Issue(title="Baz", description="describe Baz", subscriber_only=True, creator=u)
         i3.save()
 
-        c1_1 = Comment(body="Hohoho", issue=i1)
+        c1_1 = Comment(body="Hohoho", issue=i1, creator=u)
         c1_1.save()
-        c2_1 = Comment(body="Funny!", issue=i1)
+        c2_1 = Comment(body="Funny!", issue=i1, creator=u)
         c2_1.save()
 
     def test_setup_state(self):
         """Does not change state"""
         c = Client()
-        with self.assertNumQueries(2):
+        with self.assertNumQueries(7): # FIXME should be less
             r = c.get("/", follow=True)
         self.assertEqual(r.status_code, 200)
         assert "<html" in r.content.decode("utf8")
         assert len(r.context['issues']) == 3
 
-        with self.assertNumQueries(2):
+        with self.assertNumQueries(7): # FIXME should be less
             r = c.get("/i/1")
         self.assertEquals(r.status_code, 200)
         assert "<html" in r.content.decode("utf8")
@@ -38,7 +41,7 @@ class IssuesTests(TestCase):
     def test_creation(self):
         """Adding an issue and a comment"""
         c = Client()
-        with self.assertNumQueries(1):
+        with self.assertNumQueries(4): # FIXME should be less
             r = c.get("/i/create", follow=True)
         self.assertEqual(r.status_code, 200)
         assert "<form" in r.content.decode("utf8")

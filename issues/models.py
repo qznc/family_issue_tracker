@@ -9,7 +9,7 @@ class Issue(models.Model):
     description = models.TextField(null=True, blank=True,
         verbose_name=_("description"),
         help_text="Editable text field")
-    creator = models.ForeignKey('SandstormUser', null=True, blank=True,
+    creator = models.ForeignKey('SandstormUser',
         verbose_name=_("creator"))
     created = models.DateTimeField(auto_now_add=True,
         verbose_name=_("created"))
