@@ -85,7 +85,7 @@ table.issuelist,
 
 /* POSITION */
 
-#logo { float: left; margin: 0 3rem 1rem 0; }
+#logo { float: left; margin: 0 3rem 1rem 0; max-height: 40px; }
 
 table.issuemeta { margin: 1rem 0; }
 
