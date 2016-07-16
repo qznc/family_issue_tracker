@@ -29,4 +29,4 @@ test: $(SETUP_FLAG) # run test suite
 	bash -c "source .env/bin/activate && ./manage.py test -v2"
 
 test-coverage: $(SETUP_FLAG) # run test suite with coverage report
-	bash -c "source .env/bin/activate && coverage run --source='umklapp,umklapp_site' ./manage.py test -v2 && coverage html && coverage report --skip-covered --fail-under=70"
+	bash -c "source .env/bin/activate && coverage run --source='issues,family_issue_tracker' ./manage.py test -v2 && coverage html && coverage report --skip-covered --fail-under=70"
