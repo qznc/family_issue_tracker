@@ -9,8 +9,8 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="481.57523"
-   height="334.50903"
+   width="481.57999"
+   height="481.57999"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
@@ -49,7 +49,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -57,10 +57,10 @@
      inkscape:label="Ebene 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-19.103056,-707.71212)">
+     transform="translate(-19.103056,-560.64115)">
     <g
        id="g3854"
-       transform="matrix(19.617137,0,0,19.617137,-3548.1507,-10491.374)">
+       transform="matrix(19.617137,0,0,19.617137,-3548.1507,-10565.374)">
       <path
          sodipodi:nodetypes="ccccccccccccccccccc"
          inkscape:connector-curvature="0"
