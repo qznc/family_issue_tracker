@@ -5,4 +5,4 @@ install:
 - pip install -r requirements.txt
 script:
 - "coverage run --source='issues,family_issue_tracker' ./manage.py test -v2"
-- "coverage report --skip-covered"
+- "coverage report --skip-covered --fail-under=90"

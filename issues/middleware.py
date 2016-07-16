@@ -5,14 +5,6 @@ from .models import SandstormUser
 
 from urllib.parse import unquote
 
-def gravatar_image(id, size=40):
-    salt = "foo"
-    hash = hashlib.md5((salt+id).encode("utf8")).hexdigest()
-    size = 40
-    default = "//www.example.com/default.jpg"
-    urlend = urlencode({'d':default, 's':str(size)})
-    return "//www.gravatar.com/avatar/%s?%s" % (hash, urlend)
-
 def remember_sandstorm_user(request):
     sid = request.META.get('HTTP_X_SANDSTORM_USER_ID', "anonym")
     name = unquote(request.META.get('HTTP_X_SANDSTORM_USERNAME', "Anonymous User"))

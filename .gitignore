@@ -5,4 +5,5 @@ db.sqlite3
 *.mo
 *.txt.py
 *.html.py
-
+.coverage
+htmlcov/
